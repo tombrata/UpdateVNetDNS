@@ -2,12 +2,11 @@
   "properties": {
       "displayName": "Update VNET Custom DNS Servers Based on Location",
       "policyType": "Custom",
-      "mode": "All",
+      "mode": "Indexed",
       "description": "Update virtual network custom DNS servers based on a defined list of locations",
       "metadata": {
           "category": "Network"
       },
-      "version": "1.0.0",
       "parameters": {
           "listOfLocations": {
             "type": "Array",
