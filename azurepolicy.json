@@ -48,7 +48,6 @@
                   }
                   ]
               }
-          },
           "then": {
               "effect": "append",
               "details": [
@@ -59,5 +58,6 @@
               ]
             }
         }
-      }
+      },
+  "type": "Microsoft.Authorization/policyDefinitions"
 }
