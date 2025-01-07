@@ -47,7 +47,7 @@
                       "notIn": "[parameters('dnsServers')]"
                   }
                   ]
-              }
+              },
           "then": {
               "effect": "append",
               "details": [
