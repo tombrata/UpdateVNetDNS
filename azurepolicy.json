@@ -1,0 +1,62 @@
+{
+  "properties": {
+      "displayName": "Update VNET Custom DNS Servers Based on Location",
+      "policyType": "Custom",
+      "mode": "All",
+      "description": "Update virtual network custom DNS servers based on a defined list of locations",
+      "metadata": {
+          "category": "Network"
+      },
+      "version": "1.0.0",
+      "parameters": {
+          "listOfLocations": {
+            "type": "Array",
+            "metadata": {
+              "description": "List of locations that require custom dns server configuration.",
+              "displayName": "List of locations that require custom dns server configuration"
+        },
+        "defaultValue": [
+          "westus",
+          "eastus2"
+        ]
+      },
+          "dnsServers": {
+              "type": "Array",
+              "metadata": {
+                  "displayName": "DNS Servers",
+                  "description": "List of DNS servers to be applied"
+              },
+              "defaultValue": [
+                  "10.152.201.20"
+              ]
+          }
+      },
+      "policyRule": {
+          "if": {
+              "allOf": [
+                  {
+                      "field": "type",
+                      "equals": "Microsoft.Network/virtualNetworks"
+                  },
+                  {
+                      "field": "location",
+                      "in": "[parameters('listOfLocations')]"
+                  },
+                  {
+                      "field": "Microsoft.Network/virtualNetworks/dhcpOptions.dnsServers",
+                      "notIn": "[parameters('dnsServers')]"
+                  }
+                  ]
+              }
+          },
+          "then": {
+              "effect": "append",
+              "details": [
+                {
+                  "field": "Microsoft.Network/virtualNetworks/dhcpOptions.dnsServers",
+                  "value": "[parameters('dnsServers')]"
+                }
+              ]
+            }
+        }
+      }
